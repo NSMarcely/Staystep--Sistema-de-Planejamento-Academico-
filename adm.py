@@ -16,6 +16,7 @@ class Adm(Pessoa):
               print("\nCódigo inválido!")
               print(f"Você só tem {3-x} chance(s) restantes")
 
-if __name__ == "__main__":
-    teste = Adm("Marce", "senha")
-    teste.verica_codigo()
+    def adcinar_curso(self):
+        pass        
+    def remover_curso(self):
+        pass
