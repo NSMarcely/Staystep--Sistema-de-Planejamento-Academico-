@@ -11,3 +11,5 @@ class Usuario(Pessoa):
         return self.__curso
     def selecionar_curso(self):
         pass
+    def mostrar_cursos(self):
+        pass
