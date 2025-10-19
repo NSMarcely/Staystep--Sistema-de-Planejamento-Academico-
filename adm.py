@@ -16,7 +16,3 @@ class Adm(Pessoa):
               print("\nCódigo inválido!")
               print(f"Você só tem {3-x} chance(s) restantes")
 
-    def adcinar_curso(self):
-        pass        
-    def remover_curso(self):
-        pass
