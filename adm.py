@@ -25,24 +25,37 @@ class Adm(Pessoa):
         x = True 
         while x:
             print("__________Modo Usuário__________")
-            print("""1- Adcionar disciplina
-    2- Remover disciplins
-    3- Adicionar curso
-    4- Remover curso
-    5- Sair""")
+            print("""1- Adicionar disciplina
+2- Remover disciplinas
+3- Adicionar curso
+4- Remover curso
+5- Sair""")
             y = True 
             opcao = input("Opção escolhida:")
             if opcao == "1":
-                pass
+                nome_curso = input("Curso da disciplina: ")
+                nome_disciplina = input("Nome da disciplina: ")
+                horas = int(input("Horas da disciplina: "))
+                codigo = input("Código da disciplina: ")
+                requisitos = input("Requisitos (separados por vírgula, vazio se não tiver): ")
+                if requisitos.strip() == "":
+                    nomes_requisitos = []
+                else:
+                    nomes_requisitos = [r.strip() for r in requisitos.split(",")]
+                    self.__gerencia.adicionar_disciplina_curso(nome_curso, nome_disciplina, horas, codigo, nomes_requisitos)
+
             elif opcao == "2":
-                pass
+                nome_curso = input("Curso da disciplina: ")
+                nome_disciplina = input("Nome da disciplina a remover: ")
+                self.__gerencia.remove_disciplina_curso(nome_curso, nome_disciplina)
+
             elif opcao == "3":
                 nome = input("Nome do Curso:")
                 semestres = input("Quantidade de semestres:")
                 self.__gerencia.adicionar_curso(nome, semestres)
             elif opcao == "4":
                 nome = input("Nome do curso:")
-                self.__gerencia.remove_cursos(nome)
+                self.__gerencia.remove_curso(nome)
             elif opcao == "5":
                 print("Saindo do modo administrador...")  
                 x = False  
