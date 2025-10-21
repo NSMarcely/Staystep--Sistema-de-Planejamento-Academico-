@@ -27,7 +27,7 @@ class Gerenciador_Dados:
         else:
             print("Não existe esse curso")
 
-    def adicionar_disciplina_curso(self, nome_curso, nome_disciplina, horas, codigo, nomes_requisitos):
+    def adicionar_disciplina_curso(self, nome_curso, nome_disciplina, horas, codigo, requisitos):
         #fazer futaramente um metodo para não ficar repetindo codigo pra encontrar algum dado. dá até pra fazer poli!
         encontrar_curso = None
         for acha in self.__cursos:
@@ -38,8 +38,8 @@ class Gerenciador_Dados:
             print(f"O curso '{nome_curso}' não foi encontrado")   
             return
         list_requisitos = []
-        if nomes_requisitos:
-            for nome_req in nomes_requisitos:
+        if requisitos:
+            for nome_req in requisitos:
                 disciplina_req = None
                 for d in encontrar_curso.get_disciplinas():
                     if d.get_nome().lower() == nome_req.lower():
@@ -62,15 +62,18 @@ class Gerenciador_Dados:
             print("Curso não encontrado") 
             return
         disciplina_encontrada = None
-        for disciplina in encontra_curso.get_disciplinas():
-            if disciplina.get_nome().lower() == nome_disciplina.lower():
-                disciplina_encontrada = disciplina
+        for acha in encontra_curso.get_disciplinas():
+            if acha.get_nome().lower() == nome_disciplina.lower():
+                disciplina_encontrada = acha
                 break
         if not disciplina_encontrada:
             print(f"A disciplina '{nome_disciplina}' não foi encontrada no curso '{nome_curso}'.")
             return    
         encontra_curso.get_disciplinas().remove(disciplina_encontrada)
         print(f"A disciplina '{nome_disciplina}' foi removida do curso '{nome_curso}' com sucesso!")
+
+    def adicionar_metas_usuario(self,nome_usuario):
+        pass
 
 
                  

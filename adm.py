@@ -39,10 +39,10 @@ class Adm(Pessoa):
                 codigo = input("Código da disciplina: ")
                 requisitos = input("Requisitos (separados por vírgula, vazio se não tiver): ")
                 if requisitos.strip() == "":
-                    nomes_requisitos = []
+                    requisitos = []
                 else:
-                    nomes_requisitos = [r.strip() for r in requisitos.split(",")]
-                    self.__gerencia.adicionar_disciplina_curso(nome_curso, nome_disciplina, horas, codigo, nomes_requisitos)
+                    requisitos = [r.strip() for r in requisitos.split(",")]
+                    self.__gerencia.adicionar_disciplina_curso(nome_curso, nome_disciplina, horas, codigo, requisitos)
 
             elif opcao == "2":
                 nome_curso = input("Curso da disciplina: ")
