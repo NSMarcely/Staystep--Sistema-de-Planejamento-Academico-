@@ -1,18 +1,13 @@
 from disciplina import Disciplina 
 class Metas:
-    def __init__(self, texto: str, disciplina: Disciplina, tempo_estimado: float, concluida: bool):
+    def __init__(self, texto: str, tempo_estimado: float, concluida: bool):
         self.__texto = texto
-        self.__disciplina = disciplina
         self.__tempo_estimado = tempo_estimado
         self.__concluida = concluida
     def get_texto(self):
         return self.__texto
     def set_texto(self,texto):
-        self.__texto = texto
-    def get_disciplina(self):
-        return self.__disciplina
-    def set_disciplina(self, disciplina):
-        self.__disciplina = disciplina    
+        self.__texto = texto    
     def get_tempo_estimado(self):
         return self.__tempo_estimado 
     def set_tempo_estimado(self, tempo_estimado):

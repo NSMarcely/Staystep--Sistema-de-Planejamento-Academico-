@@ -1,26 +1,11 @@
 from pessoa import Pessoa
 from gerenciador_dados import Gerenciador_Dados
 class Adm(Pessoa):
-    def __init__(self, nome: str, senha: str,gerencia, codigo_verificacao: str = "Mf2412"):
+    def __init__(self, nome: str, senha: str,gerencia):
         super().__init__(nome, senha)
-        self.__codigo_verificacao = codigo_verificacao
-        self.__gerencia = gerencia
-
-    def get_codigo_verificacao(self):
-        return self.__codigo_verificacao   
+        self.__gerencia = gerencia  
     def get_gerencia(self):
         return self.__gerencia 
-
-    def verica_codigo(self): 
-       for x in range(3):
-           tentativa = input("\nDigite o código:")
-           if tentativa == self.__codigo_verificacao:
-              print(f"Bem-vindo(a), {self.get_nome()} ao modo administrador")
-              break
-           else:
-              print("\nCódigo inválido!")
-              print(f"Você só tem {3-x} chance(s) restantes")
-
     def rodar_comandos(self):
         x = True 
         while x:
@@ -40,6 +25,8 @@ class Adm(Pessoa):
                 requisitos = input("Requisitos (separados por vírgula, vazio se não tiver): ")
                 if requisitos.strip() == "":
                     requisitos = []
+                    self.__gerencia.adicionar_disciplina_curso(nome_curso, nome_disciplina, horas, codigo, requisitos)
+
                 else:
                     requisitos = [r.strip() for r in requisitos.split(",")]
                     self.__gerencia.adicionar_disciplina_curso(nome_curso, nome_disciplina, horas, codigo, requisitos)
@@ -61,3 +48,17 @@ class Adm(Pessoa):
                 x = False  
             else:
                 print("Opção invalida, por favor tente novamente :(")   
+if __name__ == "__main__":
+    # Cria o gerenciador de dados (o "banco central" do sistema)
+    gerenciador = Gerenciador_Dados()
+
+    # Cria um administrador e associa o gerenciador de dados a ele
+    admin = Adm("Maly", "1234", gerenciador)
+
+    print("===== SISTEMA STAYSTEP INICIADO =====")
+    print(f"Bem-vindo(a), {admin.get_nome()}! Entrando no modo administrador...\n")
+
+    # Chama o menu de comandos do administrador
+    admin.rodar_comandos()
+
+    print("===== FIM DO PROGRAMA =====")

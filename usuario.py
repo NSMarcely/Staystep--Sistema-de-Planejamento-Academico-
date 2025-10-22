@@ -1,19 +1,22 @@
 from pessoa import Pessoa
 from metas import Metas
 class Usuario(Pessoa):
-    def __init__(self, nome: str, senha: str, matricula: int, curso: str, metas = None):
+    def __init__(self, nome: str, senha: str, curso: str, metas = None):
         super().__init__(nome,senha)
-        self.__matricula = matricula 
         self.__curso = curso 
         self.__metas = metas if metas else []
-    def get_matricula(self):
-        return self.__matricula
+        self.__disciplinas_cursadas = []
     def get_curso(self):
         return self.__curso
     def get_metas(self):
         return self.__metas
     def set_metas(self, metas):
         self.__metas = metas
+    def get_disciplinas_cursadas(self):
+        return self.__disciplinas_cursadas
+    def set_disciplina_cursadas(self, disciplinas_cursadas):
+        self.__disciplinas_cursadas = disciplinas_cursadas 
+
     def adicionar_metas(self, metas: Metas):
         encontra = None  
         for acha in self.__metas:

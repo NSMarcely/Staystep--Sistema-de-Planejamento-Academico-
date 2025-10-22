@@ -1,14 +1,16 @@
 from curso import Curso
 from disciplina import Disciplina
+from usuario import Usuario
 class Gerenciador_Dados:
     def __init__(self):
         self.__cursos = []
+        self.__usuarios = []
     def adicionar_curso(self, nome, semestres):
         encontrado = None
         for procura in self.__cursos:
             if procura.get_nome().lower() == nome.lower():
                 encontrado = procura
-                print(f"O curso '{encontrado}' já exite!")
+                print(f"O curso '{procura.get_nome()}' já exite!")
                 return
         if not encontrado:
             curso = Curso(nome, semestres)
@@ -72,6 +74,35 @@ class Gerenciador_Dados:
         encontra_curso.get_disciplinas().remove(disciplina_encontrada)
         print(f"A disciplina '{nome_disciplina}' foi removida do curso '{nome_curso}' com sucesso!")
 
+    def registrar_usuario(self, username, usersenha):
+        procura = None
+        for acha in self.__usuarios:
+            if acha.get_nome().lower() == username.lower():
+                procura = acha
+                print(f"Infelizmente '{acha.get_nome()}'já exite ") 
+                return    
+        if len(usersenha) < 10:
+            print("Não é permitido menos que 10 caracters")
+            return
+        else:
+            usuario = Usuario(username, usersenha)
+            self.__usuarios.append(usuario) 
+    def logar_usuario(self, username, usersenha):
+        procura = None
+        for acha in self.__usuarios:
+            if acha.get_nome().lower() == username.lower():
+                procura = acha
+                break
+        if not procura:
+            print("Esse usuário não existe")  
+            return
+        if   procura.get_senha() != usersenha:
+            print("Senha incorreta")
+            return
+        else: 
+            print(f"Bem-vindo(a) {acha.get_nome()} ao seu planner")    
+
+            
     def adicionar_metas_usuario(self,nome_usuario):
         pass
 

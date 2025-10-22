@@ -16,6 +16,9 @@ class Curso:
         return self.__disciplinas
     def set_diciplinas(self, diciplinas):
         self.__disciplinas = diciplinas 
+    def __str__(self):
+        return self.__nome
+    
     #add o objeto criado em gd na lista disciplinas
     def adicionar_disciplina(self,disciplina: Disciplina):
         tem = None
