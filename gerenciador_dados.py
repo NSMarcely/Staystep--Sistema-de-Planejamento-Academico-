@@ -10,13 +10,14 @@ class Gerenciador_Dados:
         for procura in self.__cursos:
             if procura.get_nome().lower() == nome.lower():
                 encontrado = procura
-                print(f"O curso '{procura.get_nome()}' já exite!")
-                return
+                print(f"O curso '{procura.get_nome()}' já existe!")
+                return False
         if not encontrado:
             curso = Curso(nome, semestres)
             self.__cursos.append(curso)
-
-        print(f"O curso {nome}, foi adicionado com sucesso!")
+            print(f"O curso {nome}, foi adicionado com sucesso!")
+            return True
+        
     def remove_curso(self, nome):    
         encontrado = None
         for procura in self.__cursos:
@@ -26,8 +27,10 @@ class Gerenciador_Dados:
         if encontrado:
             self.__cursos.remove(encontrado)
             print("Curso removido com sucesso!")
+            return True
         else:
             print("Não existe esse curso")
+            return False
 
     def adicionar_disciplina_curso(self, nome_curso, nome_disciplina, horas, codigo, requisitos):
         #fazer futaramente um metodo para não ficar repetindo codigo pra encontrar algum dado. dá até pra fazer poli!
@@ -51,8 +54,10 @@ class Gerenciador_Dados:
                     list_requisitos.append(disciplina_req)
                 else:
                     print(f"A disciplina '{nome_req}' não existe no curso e não pode ser requisito.")
+        #cria obj            
         disciplina = Disciplina(nome_disciplina, horas, codigo, requisitos=list_requisitos)
         encontrar_curso.adicionar_disciplina(disciplina)
+        encontrar_curso.listar_disciplinas()
 
     def remove_disciplina_curso(self, nome_curso, nome_disciplina):
         encontra_curso = None
@@ -74,19 +79,21 @@ class Gerenciador_Dados:
         encontra_curso.get_disciplinas().remove(disciplina_encontrada)
         print(f"A disciplina '{nome_disciplina}' foi removida do curso '{nome_curso}' com sucesso!")
 
-    def registrar_usuario(self, username, usersenha):
+    def registrar_usuario(self, username, usersenha, usercurso):
         procura = None
         for acha in self.__usuarios:
             if acha.get_nome().lower() == username.lower():
                 procura = acha
-                print(f"Infelizmente '{acha.get_nome()}'já exite ") 
+                print(f"O usuário '{acha.get_nome()}' já existe!") 
                 return    
         if len(usersenha) < 10:
-            print("Não é permitido menos que 10 caracters")
+            print("Não é permitido menos que 10 caracteres")
             return
         else:
-            usuario = Usuario(username, usersenha)
+            #cria obj 
+            usuario = Usuario(username, usersenha, usercurso)
             self.__usuarios.append(usuario) 
+            print(f"Usuário '{username}' registrado com sucesso!")
     def logar_usuario(self, username, usersenha):
         procura = None
         for acha in self.__usuarios:
@@ -100,11 +107,17 @@ class Gerenciador_Dados:
             print("Senha incorreta")
             return
         else: 
-            print(f"Bem-vindo(a) {acha.get_nome()} ao seu planner")    
+            print(f"Bem-vindo(a) {procura.get_nome()} ao seu planner")    
 
-            
-    def adicionar_metas_usuario(self,nome_usuario):
-        pass
+    def obter_curso(self, nome_curso):
+        for curso in self.__cursos:
+            if curso.get_nome().lower() == nome_curso.lower():
+                return curso 
+        return None        
+    
+    
+
+
 
 
                  

@@ -1,64 +1,82 @@
 from pessoa import Pessoa
 from gerenciador_dados import Gerenciador_Dados
 class Adm(Pessoa):
-    def __init__(self, nome: str, senha: str,gerencia):
+    def __init__(self, nome: str, senha: str, gerencia: Gerenciador_Dados):
         super().__init__(nome, senha)
         self.__gerencia = gerencia  
     def get_gerencia(self):
         return self.__gerencia 
+    def adicionar_disciplina(self):
+        nome_curso = input("Curso da disciplina: ").strip()
+        nome_disciplina = input("Nome da disciplina: ").strip()
+        erro = True
+        horas = None
+        while horas is None:
+            horas_input = input("Horas da disciplina: ").strip()
+            if horas_input.isdigit(): 
+                horas = int(horas_input)
+                if horas > 0:
+                    break 
+                else:
+                    print("As horas devem ser um número positivo!")
+                    horas = None
+            else:
+                print("As horas devem ser um número inteiro!")
+
+        codigo = input("Código da disciplina: ").strip()  
+        requisitos = input("Requisitos (separados por vírgula, vazio se não tiver): ").strip()
+        if not requisitos:
+            requisitos_lista = []
+        else:
+            requisitos_lista = [r.strip() for r in requisitos.split(",")]
+        self.__gerencia.adicionar_disciplina_curso(nome_curso, nome_disciplina, horas, codigo, requisitos_lista)   
+
+    def remover_disciplina(self):
+        nome_curso = input("Curso da disciplina: ").strip()
+        nome_disciplina = input("Nome da disciplina a remover: ").strip()
+        self.__gerencia.remove_disciplina_curso(nome_curso, nome_disciplina)    
+    
+    def adicionar_curso(self):
+        nome = input("Nome do Curso: ").strip()
+        while True:
+            semestres_input = input("Quantidade de semestres: ").strip()
+            if semestres_input.isdigit():
+                semestres = int(semestres_input)
+                if semestres > 0:
+                    break
+                else:
+                    print("Os semestres devem ser um número positivo!")
+            else:
+                print("Os semestres devem ser um número inteiro!")
+        
+        self.__gerencia.adicionar_curso(nome, semestres)       
+    
+    def remover_curso(self):
+        nome = input("Nome do curso: ").strip()
+        self.__gerencia.remove_curso(nome)      
+
+    #obrigado 
     def rodar_comandos(self):
         x = True 
         while x:
-            print("__________Modo Usuário__________")
+            print("__________Modo Administrador__________")
             print("""1- Adicionar disciplina
 2- Remover disciplinas
 3- Adicionar curso
 4- Remover curso
 5- Sair""")
-            y = True 
-            opcao = input("Opção escolhida:")
+            opcao = input("Opção escolhida: ").strip()
+            
             if opcao == "1":
-                nome_curso = input("Curso da disciplina: ")
-                nome_disciplina = input("Nome da disciplina: ")
-                horas = int(input("Horas da disciplina: "))
-                codigo = input("Código da disciplina: ")
-                requisitos = input("Requisitos (separados por vírgula, vazio se não tiver): ")
-                if requisitos.strip() == "":
-                    requisitos = []
-                    self.__gerencia.adicionar_disciplina_curso(nome_curso, nome_disciplina, horas, codigo, requisitos)
-
-                else:
-                    requisitos = [r.strip() for r in requisitos.split(",")]
-                    self.__gerencia.adicionar_disciplina_curso(nome_curso, nome_disciplina, horas, codigo, requisitos)
-
+                self.adicionar_disciplina()
             elif opcao == "2":
-                nome_curso = input("Curso da disciplina: ")
-                nome_disciplina = input("Nome da disciplina a remover: ")
-                self.__gerencia.remove_disciplina_curso(nome_curso, nome_disciplina)
-
+                self.remover_disciplina()
             elif opcao == "3":
-                nome = input("Nome do Curso:")
-                semestres = input("Quantidade de semestres:")
-                self.__gerencia.adicionar_curso(nome, semestres)
+                self.adicionar_curso()
             elif opcao == "4":
-                nome = input("Nome do curso:")
-                self.__gerencia.remove_curso(nome)
+                self.remover_curso()
             elif opcao == "5":
                 print("Saindo do modo administrador...")  
-                x = False  
+                break  
             else:
-                print("Opção invalida, por favor tente novamente :(")   
-if __name__ == "__main__":
-    # Cria o gerenciador de dados (o "banco central" do sistema)
-    gerenciador = Gerenciador_Dados()
-
-    # Cria um administrador e associa o gerenciador de dados a ele
-    admin = Adm("Maly", "1234", gerenciador)
-
-    print("===== SISTEMA STAYSTEP INICIADO =====")
-    print(f"Bem-vindo(a), {admin.get_nome()}! Entrando no modo administrador...\n")
-
-    # Chama o menu de comandos do administrador
-    admin.rodar_comandos()
-
-    print("===== FIM DO PROGRAMA =====")
+                print("Opção inválida, por favor tente novamente :(")
