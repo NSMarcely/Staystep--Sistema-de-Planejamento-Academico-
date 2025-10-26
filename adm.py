@@ -9,7 +9,6 @@ class Adm(Pessoa):
     def adicionar_disciplina(self):
         nome_curso = input("Curso da disciplina: ").strip()
         nome_disciplina = input("Nome da disciplina: ").strip()
-        erro = True
         horas = None
         while horas is None:
             horas_input = input("Horas da disciplina: ").strip()
@@ -18,10 +17,10 @@ class Adm(Pessoa):
                 if horas > 0:
                     break 
                 else:
-                    print("As horas devem ser um número positivo!")
+                    print("\n|As horas devem ser um número positivo!")
                     horas = None
             else:
-                print("As horas devem ser um número inteiro!")
+                print("\n|As horas devem ser um número inteiro!")
 
         codigo = input("Código da disciplina: ").strip()  
         requisitos = input("Requisitos (separados por vírgula, vazio se não tiver): ").strip()
@@ -45,9 +44,9 @@ class Adm(Pessoa):
                 if semestres > 0:
                     break
                 else:
-                    print("Os semestres devem ser um número positivo!")
+                    print("\n|Os semestres devem ser um número positivo!")
             else:
-                print("Os semestres devem ser um número inteiro!")
+                print("\n|Os semestres devem ser um número inteiro!")
         
         self.__gerencia.adicionar_curso(nome, semestres)       
     
@@ -59,7 +58,7 @@ class Adm(Pessoa):
     def rodar_comandos(self):
         x = True 
         while x:
-            print("__________Modo Administrador__________")
+            print("\n__________Modo Administrador__________")
             print("""1- Adicionar disciplina
 2- Remover disciplinas
 3- Adicionar curso
@@ -76,7 +75,7 @@ class Adm(Pessoa):
             elif opcao == "4":
                 self.remover_curso()
             elif opcao == "5":
-                print("Saindo do modo administrador...")  
+                print("\n|Saindo do modo administrador...")  
                 break  
             else:
-                print("Opção inválida, por favor tente novamente :(")
+                print("\n|Opção inválida, por favor tente novamente :(")

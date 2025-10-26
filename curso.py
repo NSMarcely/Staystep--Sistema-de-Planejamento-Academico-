@@ -1,42 +1,32 @@
 from disciplina import Disciplina 
 class Curso:
     def __init__(self, nome: str,semestres):
-        self.__nome = nome 
-        self.__semestres = semestres
-        self.__disciplinas = []
-    def get_nome(self):
-        return self.__nome
-    def set_nome(self, nome):
-        self.__nome = nome
-    def get_semestres(self):
-        return self.__semestres
-    def set_semestres(self, semestres):
-        self.__semestres = semestres      
-    def get_disciplinas(self):
-        return self.__disciplinas
-    def set_disciplinas(self, disciplinas):
-        self.__disciplinas = disciplinas 
+        self.nome = nome 
+        self.semestres = semestres
+        self.disciplinas: dict[str, Disciplina] = {}
     def __str__(self):
-        return self.__nome
+        return f"{self.nome} ({self.semestres} semestres)"
     
-    #add o objeto criado em gd na lista disciplinas
-    def adicionar_disciplina(self,disciplina: Disciplina):
-        for checa in self.__disciplinas:
-            if checa.get_nome().lower() == disciplina.get_nome().lower():
-                print("Já existe essa disciplina")
-                return
-        self.__disciplinas.append(disciplina)
-        print(f"Disciplina {disciplina.get_nome()} foi adicionada com sucesso!")
-
-    def listar_disciplinas(self):
-        print("\nDisciplinas atuais do curso:")
-        if not self.__disciplinas:
-            print(f"O curso {self.__nome} ainda não possui disciplinas.")
+    def adicionar_disciplina(self, disciplina: Disciplina):
+        if disciplina.codigo in self.disciplinas:
+            print(f"\n|A disciplina '{disciplina.nome}' já existe no curso '{self.nome}'.")
             return
-        print(f"Disciplinas do curso {self.__nome}:")
-        for disciplina in self.__disciplinas:
-            print(f"- {disciplina.get_nome()} (Código: {disciplina.get_codigo()}, {disciplina.get_horas()}h)")
+        self.disciplinas[disciplina.codigo] = disciplina
+        print(f"\n|Disciplina '{disciplina.nome}' adicionada com sucesso ao curso '{self.nome}'.")
     
-                
-
-
+    def remover_disciplina(self, codigo: str):
+        if codigo not in self.disciplinas:
+            print(f"\n|A disciplina com código '{codigo}' não foi encontrada no curso '{self.nome}'.")
+            return
+        removida = self.disciplinas.pop(codigo)
+        print(f"\n|Disciplina '{removida.nome}' removida do curso '{self.nome}' com sucesso!")
+    def listar_disciplinas(self):
+        if not self.disciplinas:
+            print(f"\n|O curso '{self.nome}' ainda não possui disciplinas cadastradas.")
+            return
+        print(f"\n|Disciplinas do curso '{self.nome}':")
+        for disciplina in self.disciplinas.values():
+            reqs = [d.nome for d in disciplina.requisitos]
+            reqs_str = ", ".join(reqs) if reqs else "Nenhum"
+            print(f"- {disciplina.codigo} - {disciplina.nome} ({disciplina.horas}h), Requisitos: {reqs_str}")    
+    
