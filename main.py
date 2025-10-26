@@ -36,7 +36,6 @@ class Main:
             print("\n|Nome de usuário não pode estar vazio!")
             return
         usersenha = input("\n|Senha (mínimo 10 caracteres): ").strip()
-        # Listar cursos disponíveis
         if not self.gerenciador.cursos:
             print("\n|Não há cursos cadastrados no sistema!")
             return
@@ -62,10 +61,8 @@ class Main:
     
     def login_adm(self):
         print("\n__Login do Adm__")
-        # Credenciais fixas do administrador
         username = input("Nome de administrador: ").strip()
         usersenha = input("Senha: ").strip()
-        # Verifica as credenciais fixas
         if username == "Cely" and usersenha == "1234":
             administrador = Adm("Cely", "1234", self.gerenciador)
             print(f"\nBem-vindo(a), Administrador!")
@@ -84,10 +81,8 @@ class Main:
 
     def executar(self):
         print("\n|Inicializando Staystep - Planner academico...")
-        # Inicia o menu principal
         self.menu_principal()
 
-# Execução do programa
 if __name__ == "__main__":
     sistema = Main()
     sistema.executar()

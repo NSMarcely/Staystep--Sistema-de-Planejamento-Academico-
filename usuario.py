@@ -134,7 +134,6 @@ class Usuario(Pessoa):
 
     def _adicionar_disciplina_cursando_input(self):
         print("\n_____Adicionar Disciplina em Andamento_____")
-        
         # Mostra disciplinas disponíveis do curso
         curso_obj = self.gerenciador.retorna_curso(self.get_curso())
         if curso_obj:
@@ -145,22 +144,18 @@ class Usuario(Pessoa):
                 if chave not in self.disciplinas_cursadas and chave not in self.disciplinas_cursando:
                     print(f"- {disciplina.nome} (Código: {disciplina.codigo}, {disciplina.horas}h)")
                     disciplinas_disponiveis.append(disciplina)
-            
             if not disciplinas_disponiveis:
                 print("\n|Todas as disciplinas já foram cursadas ou estão em andamento!")
                 return
-        
         nome_disciplina = input("\nDigite o nome da disciplina: ").strip()
         if not nome_disciplina:
             print("\n|Nome da disciplina não pode estar vazio!")
             return
-        
         # Busca a disciplina REAL/obj do gerenciador
         disciplina = self.gerenciador.buscar_disciplina_por_nome(self.get_curso(), nome_disciplina)
         if not disciplina:
             print(f"A disciplina '{nome_disciplina}' não existe no curso '{self.get_curso()}'")
             return
-        
         # Usa a disciplina REAL/obj do sistema
         self.adicionar_disciplinas_cursando(disciplina)
         
@@ -190,8 +185,7 @@ class Usuario(Pessoa):
         except ValueError:
             print("\n|Tempo deve ser um número! Usando 0 horas.")
             tempo_float = 0.0
-        
-        # Cria a meta e adiciona
+        # Cria/intacia a meta e adiciona
         meta = Metas(texto, tempo_float, False)
         self.adicionar_metas(meta)
         print("\n|Meta adicionada com sucesso!")
