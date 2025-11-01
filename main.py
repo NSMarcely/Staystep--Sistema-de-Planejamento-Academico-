@@ -6,7 +6,7 @@ class Main:
     def __init__(self):
         self.gerenciador = Gerenciador_Dados()
         self.usuario_logado = None
-    
+        self.gerenciador.carregar_dados()
     def menu_principal(self):
         while True:
             print("_"*50)
@@ -25,6 +25,7 @@ class Main:
                 self.login_adm()
             elif opcao == "4":
                 print("\n|Saindo do sistema...")
+                self.gerenciador.salvar_dados()
                 break
             else:
                 print("\n|Opção inválida! Tente novamente.")
@@ -46,14 +47,12 @@ class Main:
         if not usercurso:
             print("\n|Curso não pode estar vazio!")
             return
-        # Usa o método que você já tem no gerenciador
         self.gerenciador.registrar_usuario(username, usersenha, usercurso)
     
     def login_usuario(self):
         print("\n__Login do Usuário__") 
         username = input("Nome de usuário: ").strip()
         usersenha = input("Senha: ").strip()
-        # Usa o método que tem no gerenciador
         usuario = self.gerenciador.logar_usuario(username, usersenha)
         if usuario:
             self.usuario_logado = usuario
