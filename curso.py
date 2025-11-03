@@ -15,7 +15,6 @@ class Curso:
                 for codigo, disciplina in self.disciplinas.items()
             }
         }
-    
     @classmethod
     def from_dict(cls, dados):
         curso = cls(dados["nome"], dados["semestres"])
@@ -49,7 +48,6 @@ class Curso:
             for req in disciplina.requisitos[:]:
                 if req.codigo == codigo:
                     disciplina.requisitos.remove(req)
-        
         removida = self.disciplinas.pop(codigo)
         print(f"\n|Disciplina '{removida.nome}' removida do curso '{self.nome}' com sucesso!")
         return True

@@ -17,7 +17,6 @@ class Metas:
             "tempo_estimado": self.tempo_estimado,
             "concluida": self.concluida
         }
-    
     @classmethod
     def from_dict(cls, dados):
         return cls(

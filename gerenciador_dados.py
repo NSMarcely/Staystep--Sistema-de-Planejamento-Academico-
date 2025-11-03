@@ -39,7 +39,6 @@ class Gerenciador_Dados:
         if not encontrar_curso:
             print(f"\n|O curso '{nome_curso}' não foi encontrado")   
             return False
-        
         try:
             horas = int(horas)
             if horas <= 0:
@@ -47,8 +46,7 @@ class Gerenciador_Dados:
                 return False
         except ValueError:
             print("\n|Horas devem ser um número inteiro!")
-            return False
-            
+            return False    
         list_requisitos = []
         if requisitos:
             for nome_req in requisitos:
@@ -61,7 +59,6 @@ class Gerenciador_Dados:
                     list_requisitos.append(disciplina_req)
                 else:
                     print(f"\n|Aviso: Disciplina '{nome_req}' não existe e não será adicionada como requisito.")
-        
         disciplina = Disciplina(nome_disciplina, horas, codigo, requisitos=list_requisitos)
         resultado = encontrar_curso.adicionar_disciplina(disciplina)
         if resultado:
@@ -83,11 +80,9 @@ class Gerenciador_Dados:
             if disciplina.nome.lower() == nome_disciplina.lower():
                 disciplina_encontrada = disciplina
                 break
-                
         if not disciplina_encontrada:
             print(f"\n|A disciplina '{nome_disciplina}' não foi encontrada no curso '{nome_curso}'.")
             return False    
-            
         resultado = encontra_curso.remover_disciplina(disciplina_encontrada.codigo)
         if resultado:
             self.salvar_dados()
@@ -97,15 +92,12 @@ class Gerenciador_Dados:
         if username.lower() in self.__usuarios:
             print(f"\n|O usuário '{username}' já existe!") 
             return False
-                
         if len(usersenha) < 10:
             print("\n|Não é permitido menos que 10 caracteres")
             return False
-            
         if usercurso.lower() not in self.cursos:
             print(f"\n|O curso '{usercurso}' não existe!")
             return False
-            
         usuario = Usuario(username, usersenha, usercurso, self)
         self.__usuarios[username.lower()] = usuario 
         print(f"\n|Usuário '{username}' registrado com sucesso!")
@@ -190,7 +182,6 @@ class Gerenciador_Dados:
                     print(f"|Erro ao carregar curso {nome}: {e}")
             usuarios_dict = dados.get("usuarios", {})
             usuarios_carregados = {}
-            
             for username, usuario_dados in usuarios_dict.items():
                 try:
                     usuario = Usuario.from_dict(usuario_dados, self)
