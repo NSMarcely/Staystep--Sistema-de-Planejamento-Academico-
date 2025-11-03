@@ -4,9 +4,6 @@ class Metas:
         self.tempo_estimado = tempo_estimado
         self.concluida = concluida
     
-    @property
-    def tempo(self):
-        return self.tempo_estimado
     
     def status(self):
         return "Concluída" if self.concluida else "Pendente"

@@ -3,21 +3,39 @@
         "engenharia": {
             "nome": "Engenharia",
             "semestres": 10,
-            "disciplinas": {}
+            "disciplinas": {
+                "APC90": {
+                    "nome": "APC",
+                    "horas": 90,
+                    "codigo": "APC90",
+                    "requisitos": []
+                },
+                "POO90": {
+                    "nome": "POO",
+                    "horas": 60,
+                    "codigo": "POO90",
+                    "requisitos": [
+                        "APC90"
+                    ]
+                }
+            }
         }
     },
     "usuarios": {
         "marcely": {
+            "nome": "",
             "senha": "m123456789",
             "curso": "engenharia",
             "metas": [
                 {
                     "texto": "Estudar APC",
                     "tempo_estimado": 1.0,
-                    "concluida": false
+                    "concluida": true
                 }
             ],
-            "disciplinas_cursadas": {},
+            "disciplinas_cursadas": {
+                "apc": "APC90"
+            },
             "disciplinas_cursando": {}
         }
     }
