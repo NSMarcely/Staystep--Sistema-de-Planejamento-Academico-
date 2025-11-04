@@ -98,7 +98,7 @@ class Usuario(Pessoa):
             status = "✓ Concluída" if meta.concluida else "Pendente :("  
             tempo = f" ({meta.tempo_estimado}h)" if meta.tempo_estimado > 0 else ""
             print(f"{i}. {meta.texto}{tempo} - {status}")
-
+            
     def checa_requisitos(self, disciplina_req: Disciplina):
         requisitos = disciplina_req.requisitos
         if not requisitos:

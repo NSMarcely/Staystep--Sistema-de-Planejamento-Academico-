@@ -146,7 +146,7 @@ class Gerenciador_Dados:
         for curso in self.cursos.values():
             print(f"- {curso.nome} ({curso.semestres} semestres)")
         
-    # Dados JSON
+    # dados json
     def salvar_dados(self):
         try:
             dados = {

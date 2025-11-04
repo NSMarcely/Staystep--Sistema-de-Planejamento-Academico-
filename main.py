@@ -1,5 +1,4 @@
 from gerenciador_dados import Gerenciador_Dados
-from usuario import Usuario
 from adm import Adm
 
 class Main:
