@@ -198,11 +198,3 @@ class Gerenciador_Dados:
             print(f"|Erro ao decodificar JSON: {e}")
         except Exception as e:
             print(f"|Erro ao carregar dados: {e}")
-
-    def listar_usuarios(self):
-        if not self.__usuarios:
-            print("\n|Nenhum usuário cadastrado.")
-            return
-        print("\n___Usuários Cadastrados___")
-        for usuario in self.__usuarios.values():
-            print(f"- {usuario.get_nome()} (Curso: {usuario.get_curso()})")

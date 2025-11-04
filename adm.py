@@ -106,8 +106,7 @@ class Adm(Pessoa):
 3- Adicionar curso
 4- Remover curso
 5- Listar cursos
-6- Listar usuários
-7- Sair""")
+6- Sair""")
             opcao = input("\nOpção escolhida: ").strip()
             if opcao == "1":
                 self.adicionar_disciplina()
@@ -120,8 +119,6 @@ class Adm(Pessoa):
             elif opcao == "5":
                 self.listar_cursos()
             elif opcao == "6":
-                self.get_gerencia().listar_usuarios()
-            elif opcao == "7":
                 print("\n|Saindo do modo administrador...")
                 self.get_gerencia().salvar_dados()
                 break  

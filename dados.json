@@ -19,6 +19,26 @@
                     ]
                 }
             }
+        },
+        "curso 2": {
+            "nome": "Curso 2",
+            "semestres": 10,
+            "disciplinas": {
+                "dis190": {
+                    "nome": "dis 1",
+                    "horas": 90,
+                    "codigo": "dis190",
+                    "requisitos": []
+                },
+                "dis290": {
+                    "nome": "dis 2",
+                    "horas": 60,
+                    "codigo": "dis290",
+                    "requisitos": [
+                        "dis190"
+                    ]
+                }
+            }
         }
     },
     "usuarios": {
